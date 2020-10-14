@@ -9,7 +9,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-        <li class="nav-item active">
+        <li class="nav-item">
             <inertia-link class="nav-link" href="/">Home</inertia-link>
         </li>
         <li class="nav-item">

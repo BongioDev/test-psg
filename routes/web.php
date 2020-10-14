@@ -14,8 +14,13 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/', 'UserController@index')->name('home');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/users', 'UserController@showUsers');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/', function () {
+    return Inertia\Inertia::render('Home');
 })->name('dashboard');
