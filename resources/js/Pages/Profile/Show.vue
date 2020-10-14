@@ -16,15 +16,15 @@
 
                 <update-password-form class="mt-10 sm:mt-0" />
 
-                <div v-if="$page.jetstream.canManageTwoFactorAuthentication">
+                <!-- <div v-if="$page.jetstream.canManageTwoFactorAuthentication">
                     <jet-section-border />
 
                     <two-factor-authentication-form class="mt-10 sm:mt-0" />
-                </div>
+                </div> -->
 
-                <jet-section-border />
+                <!-- <jet-section-border /> -->
 
-                <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" />
+                <!-- <logout-other-browser-sessions-form :sessions="sessions" class="mt-10 sm:mt-0" /> -->
 
                 <jet-section-border />
 
