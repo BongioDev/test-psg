@@ -15,7 +15,9 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/users', 'UserController@showUsers');
+Route::middleware(['auth:sanctum', 'verified'])->get('/users', 'AdminController@showUsers');
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/users/create', 'AdminController@createUser');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');

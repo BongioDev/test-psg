@@ -3295,13 +3295,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Navlayout: _Shared_NavLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['users', 'LoggedInUser'],
-  //check if user is not admin, then redirect...
+  props: ['users', 'LoggedInUser', 'buildings', 'errors', 'successMessage'],
+  data: function data() {
+    return {
+      form: {
+        name: '',
+        email: '',
+        building: ''
+      }
+    };
+  },
+  methods: {
+    createUser: function createUser() {
+      this.$inertia.post('/users/create', this.form).then(function (res) {//
+      });
+    }
+  },
+  //check if user is not admin onload, then redirect...
   created: function created() {
     if (this.$props.LoggedInUser.role != 1) {
       window.location.href = '/';
@@ -4257,7 +4290,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4281,7 +4313,8 @@ __webpack_require__.r(__webpack_exports__);
     path: function path() {
       return window.location.pathname;
     }
-  }
+  },
+  inject: ['page']
 });
 
 /***/ }),
@@ -25888,95 +25921,212 @@ var render = function() {
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _c("br"),
-                _vm._v(" "),
                 _c("h4", [_vm._v("Gebruiker aanmaken")]),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Naam" }
-                  }),
-                  _vm._v(" "),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: { type: "email", placeholder: "Email" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "select",
-                    {
-                      staticClass: "form-control",
-                      attrs: { id: "exampleFormControlSelect1" }
-                    },
-                    [
-                      _c("option", [
-                        _vm._v("Hier komen alle gebouwen in te staan")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("table", { staticClass: "table table-hover table-dark" }, [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Naam")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Email")]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [
-                        _vm._v("Aangemaakt op")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", { attrs: { scope: "col" } }, [_vm._v("Actie")])
+                _vm.successMessage
+                  ? _c("div", { staticClass: "alert alert-success mt-4" }, [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.successMessage) +
+                          "\n          "
+                      )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.users, function(user) {
-                      return _c("tr", { key: user.id }, [
-                        _c("th", { attrs: { scope: "row" } }, [
-                          _vm._v(_vm._s(user.id))
+                  : _vm._e(),
+                _vm._v(" "),
+                Object.keys(_vm.errors).lenght > 0
+                  ? _c("div", { staticClass: "alert alert-danger mt-4" }, [
+                      _vm._v(
+                        "\n            " +
+                          _vm._s(_vm.errors[Object.keys(_vm.errors)[0]][0]) +
+                          "\n          "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { action: "/users/create", method: "POST" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.createUser($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.name,
+                            expression: "form.name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", placeholder: "Naam" },
+                        domProps: { value: _vm.form.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "name", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.email,
+                            expression: "form.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "email", placeholder: "Email" },
+                        domProps: { value: _vm.form.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.building,
+                              expression: "form.building"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "exampleFormControlSelect1" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "building",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Empty" } }, [
+                            _vm._v("Kies een gebouw of laat leeg")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.buildings, function(building) {
+                            return _c("option", { key: building.id }, [
+                              _vm._v(_vm._s(building.name))
+                            ])
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Aanmaken")]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "table-responsive" }, [
+                  _c("table", { staticClass: "table table-hover table-dark" }, [
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+                        _vm._v(" "),
+                        _c("th", { attrs: { scope: "col" } }, [_vm._v("Naam")]),
+                        _vm._v(" "),
+                        _c("th", { attrs: { scope: "col" } }, [
+                          _vm._v("Email")
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.name))]),
+                        _c("th", { attrs: { scope: "col" } }, [
+                          _vm._v("Aangemaakt op")
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.email))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.created_at))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-primary btn-sm",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Aanpassen")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-danger btn-sm",
-                              attrs: { type: "button" }
-                            },
-                            [_vm._v("Verwijderen")]
-                          )
-                        ])
+                        _c("th", { attrs: { scope: "col" } }, [_vm._v("Actie")])
                       ])
-                    }),
-                    0
-                  )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.users, function(user) {
+                        return _c("tr", { key: user.id }, [
+                          _c("th", { attrs: { scope: "row" } }, [
+                            _vm._v(_vm._s(user.id))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(user.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(user.email))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(user.created_at))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Aanpassen")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Verwijderen")]
+                            )
+                          ])
+                        ])
+                      }),
+                      0
+                    )
+                  ])
                 ])
               ])
         ])

@@ -62,7 +62,6 @@
                             </jet-dropdown>
 
     </nav>
-
      <content>
       <slot />
     </content>
@@ -99,6 +98,8 @@
           path() {
                 return window.location.pathname
             }
-        }
+        },
+
+        inject: ['page'],
     }
 </script>
