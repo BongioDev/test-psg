@@ -60,6 +60,6 @@ class User extends Authenticatable
     ];
 
     public function building() {
-        return $this->hasMany('App\Models\Building');
+        return $this->belongsToMany('App\Models\Building');
     }
 }

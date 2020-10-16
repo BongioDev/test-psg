@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddBuildingIdToUsersTable extends Migration
+class CreateUserBuildingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddBuildingIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('building_id')->nullable();
+        Schema::create('user_buildings', function (Blueprint $table) {
+            $table->id();
+            $table->string('user_id');
+            $table->string('building_id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddBuildingIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('building_id');
-        });
+        Schema::dropIfExists('user_buildings');
     }
 }

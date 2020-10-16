@@ -17,7 +17,18 @@ use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/users', 'AdminController@showUsers');
 
+//create user
 Route::middleware(['auth:sanctum', 'verified'])->post('/users/create', 'AdminController@createUser');
+
+//delete user
+Route::middleware(['auth:sanctum', 'verified'])->post('/users/delete/{user_id}', 'AdminController@deleteUser');
+
+//update user VIEW
+Route::middleware(['auth:sanctum', 'verified'])->get('/users/updatePage/{user_id}', 'AdminController@showUpdateUser');
+
+//update user
+Route::middleware(['auth:sanctum', 'verified'])->patch('/users/updatePage/{user_id}/update', 'AdminController@updateUser');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
