@@ -17,6 +17,8 @@ use App\Http\Controllers\UserController;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/users', 'AdminController@showUsers');
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/buildings', 'UserController@showBuildingsUser');
+
 //create user
 Route::middleware(['auth:sanctum', 'verified'])->post('/users/create', 'AdminController@createUser');
 

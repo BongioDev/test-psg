@@ -63,7 +63,6 @@
                     <td>{{user.created_at}}</td>
                     <td>
                       <inertia-link class="btn btn-primary btn-sm" :href="`/users/updatePage/${user.id}`">Aanpassen</inertia-link>
-                      <!-- <button type="button" class="btn btn-primary btn-sm" v-on:click="updateUser(user.id)">Aanpassen</button> -->
                       <button type="button" class="btn btn-danger btn-sm" v-on:click="deleteUser(user.id)">Verwijderen</button>
                     </td>
                   </tr>

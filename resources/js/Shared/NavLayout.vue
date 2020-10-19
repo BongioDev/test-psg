@@ -100,6 +100,7 @@
             }
         },
 
-        inject: ['page'],
+//error handeling???
+        // inject: ['page'],
     }
 </script>

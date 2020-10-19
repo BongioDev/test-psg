@@ -33,16 +33,17 @@
                 <br>
                 <input type="email" class="form-control" placeholder="Email" v-model="form.email">
               </div>
-              <div class="form-group">
-                <!-- <select class="form-control" id="exampleFormControlSelect1" v-model="form.building">
-                  <option selected value="Empty">Kies een gebouw of laat leeg</option>
-                  <option v-for="building in buildings" :key="building.id">{{building.name}}</option>
-                </select> -->
-                <br> 
-              </div>
+               <!-- building checkboxes -->
+               <span v-for="building in buildings" :key="building.id">
+
+                 <input type="checkbox" name="building" :value='building.id' v-model="form.building">
+                 <label>{{building.name}}</label><br>
+
+               </span>
+           
               <button type="submit" class="btn btn-primary">Aanpassen</button>
             </form>
-               
+
             </div>
   
         </div>
@@ -50,7 +51,6 @@
     </div>
   </navlayout>
 </template>
-
 
 <script>
 
@@ -61,13 +61,14 @@
       Navlayout,
     },
 
-    props: ['user', 'LoggedInUser', 'errors', 'successMessage'],
+    props: ['user', 'user_buildings', 'buildings', 'LoggedInUser', 'errors', 'successMessage'],
 
     data() {
       return {
       form: {
         name: this.user.name,
         email: this.user.email,
+        building: [],
       }
       }
     },
@@ -77,7 +78,7 @@
       updateUser() {
         this.$inertia.patch('/users/updatePage/' + this.$props.user.id +'/update', this.form)
         .then((res) => {
-        //
+        console.log(this.form.building );
         });
       },
 
