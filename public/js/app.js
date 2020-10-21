@@ -4367,18 +4367,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Navlayout: _Shared_NavLayout__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['user', 'user_buildings', 'errors', 'successMessage'],
+  props: ['user', 'user_buildings', 'user_rooms', 'errors', 'successMessage'],
   //     data() {
   //    return;
   //     },
   methods: {},
   //check if user is not admin onload, then redirect...
-  created: function created() {//
+  created: function created() {
+    console.log(this.$props.user_rooms);
   }
 });
 
@@ -27835,17 +27839,26 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm.user_buildings
-            ? _c("div", [
-                _c(
-                  "ul",
-                  _vm._l(_vm.user_buildings, function(user_building) {
-                    return _c("li", { key: user_building.id }, [
-                      _vm._v(_vm._s(user_building.name))
-                    ])
-                  }),
-                  0
-                )
-              ])
+            ? _c(
+                "div",
+                _vm._l(_vm.user_buildings, function(user_building) {
+                  return _c(
+                    "ul",
+                    { key: user_building.id },
+                    [
+                      _c("li", [_vm._v(_vm._s(user_building.name))]),
+                      _vm._v(" "),
+                      _vm._l(_vm.user_rooms, function(user_room) {
+                        return _c("li", { key: user_room.id }, [
+                          _vm._v(_vm._s(user_room[user_building.id - 1].name))
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                }),
+                0
+              )
             : _c("div", [_c("h5", [_vm._v("Geen gebouwen gevonden")])])
         ])
       ])

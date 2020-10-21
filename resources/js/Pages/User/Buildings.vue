@@ -20,12 +20,15 @@
             <h4>Welkom {{user.name}} hieronder vind u uw gebouwen</h4>
 
             <div v-if="user_buildings">
-                <ul>
-                    <li v-for="user_building in user_buildings" :key="user_building.id">{{user_building.name}}</li>
+                <ul v-for="user_building in user_buildings" :key="user_building.id">
+                  <li >{{user_building.name}}</li>
+                                                                            <!-- hoe hier lopen? aantal gebouwen... -->
+                                                                            <!-- dit werkt niet, rooms staan niet juiste plaats, en mag ook niet, wat als id niet volgorde is.... -->
+                  <li v-for="user_room in user_rooms" :key="user_room.id">{{user_room[(user_building.id)-1].name}}</li>
                 </ul>
             </div>
             <div v-else>
-                <h5>Geen gebouwen gevonden</h5>
+              <h5>Geen gebouwen gevonden</h5>
             </div>
   
         </div>
@@ -43,7 +46,7 @@
       Navlayout,
     },
 
-    props: ['user', 'user_buildings', 'errors', 'successMessage'],
+    props: ['user', 'user_buildings', 'user_rooms', 'errors', 'successMessage'],
 
 //     data() {
 //    return;
@@ -55,7 +58,7 @@
     
     //check if user is not admin onload, then redirect...
     created() {
-   //
+   console.log(this.$props.user_rooms);
   }
 
   }
