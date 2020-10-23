@@ -25,7 +25,7 @@
                                                                             <!-- hoe hier lopen? aantal gebouwen... -->
                                                                             <!-- dit werkt niet, rooms staan niet juiste plaats, en mag ook niet, wat als id niet volgorde is.... -->
                   <li v-for="user_room in user_rooms" :key="user_room.id">{{user_room[(user_building.id)-1].name}}</li>
-                </ul>
+                 </ul>
             </div>
             <div v-else>
               <h5>Geen gebouwen gevonden</h5>
